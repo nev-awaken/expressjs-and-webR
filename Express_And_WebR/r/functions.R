@@ -23,8 +23,8 @@ run_kmeans <- function(data_matrix, k) {
 }
 
 run_hw_forecast <- function(ts_values, horizon = 5) {
-  ts_data <- ts(ts_values, frequency = 1)  # key fix here
-  model <- HoltWinters(ts_data, beta = FALSE, gamma = FALSE)  # force simple exponential smoothing
+  ts_data <- ts(ts_values, frequency = 1)
+  model <- HoltWinters(ts_data, beta = FALSE, gamma = FALSE)
   preds <- predict(model, n.ahead = horizon)
   return(as.numeric(preds))
 }

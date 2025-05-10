@@ -1,6 +1,6 @@
-const { webR } = require("../webrInstance");
+import { webR } from '../webrInstance.js';
 
-exports.summaryStats = async (req, res) => {
+export const summaryStats = async (req, res) => {
   try {
     await webR.objs.globalEnv.bind("x", req.body.values);
     const result = await webR.evalR("summary_stats(x)");
@@ -10,7 +10,7 @@ exports.summaryStats = async (req, res) => {
   }
 };
 
-exports.tTest = async (req, res) => {
+export const tTest = async (req, res) => {
   try {
     await webR.objs.globalEnv.bind("x", req.body.x);
     await webR.objs.globalEnv.bind("y", req.body.y);
@@ -21,7 +21,7 @@ exports.tTest = async (req, res) => {
   }
 };
 
-exports.pca = async (req, res) => {
+export const pca = async (req, res) => {
   try {
     await webR.objs.globalEnv.bind("data_matrix", req.body.data);
     const result = await webR.evalR("run_pca(data_matrix)");
@@ -32,7 +32,7 @@ exports.pca = async (req, res) => {
   }
 };
 
-exports.kMeans = async (req, res) => {
+export const kMeans = async (req, res) => {
   try {
     const { data, k } = req.body;
     await webR.objs.globalEnv.bind("data_matrix", data);
@@ -45,8 +45,7 @@ exports.kMeans = async (req, res) => {
   }
 };
 
-
-exports.hwForecast = async (req, res) => {
+export const hwForecast = async (req, res) => {
   try {
     const { values, horizon } = req.body;
     await webR.objs.globalEnv.bind("ts_values", values);
@@ -58,5 +57,3 @@ exports.hwForecast = async (req, res) => {
     res.status(500).json({ error: "Forecasting failed" });
   }
 };
-
-
